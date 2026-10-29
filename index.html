@@ -447,18 +447,50 @@
 
   /* ===== LINE 身分：只有老師本人會出現「備課筆記」 ===== */
   (function(){
-    if(typeof liff==='undefined' || CONFIG.NOTES_LIFF_ID.indexOf('請填入')>-1) return;
+    // 網址後面加 ?check=1 會顯示檢查結果；加 ?teacher=1 在一般瀏覽器也能登入
+    const q = () => location.search + ' ' + location.href;
+    const wantCheck = () => /check=1/.test(q());
+    const wantLogin = () => /teacher=1/.test(q());
+    const log = [];
+    function report(){
+      if(!wantCheck()) return;
+      let box = document.getElementById('chkBox');
+      if(!box){
+        box = document.createElement('div'); box.id='chkBox';
+        box.style.cssText='position:fixed;left:12px;right:12px;bottom:12px;z-index:99;background:#fff;border:2px solid #8c7c6a;border-radius:14px;padding:14px 16px;font-size:13px;line-height:1.9;box-shadow:0 8px 24px rgba(0,0,0,.15);word-break:break-all';
+        document.body.appendChild(box);
+      }
+      box.innerHTML = '<b>🔍 檢查結果（截圖給 Claude）</b><br>' + log.join('<br>');
+    }
+    function add(s){ log.push(s); report(); }
+
+    add('網頁版本：notes-v2');
+    if(typeof liff==='undefined'){ add('❌ LINE 工具沒載入（網路問題）'); return; }
+    if(CONFIG.NOTES_LIFF_ID.indexOf('請填入')>-1){ add('❌ LIFF ID 沒填'); return; }
+    add('在 LINE 裡開啟：' + (/Line\//i.test(navigator.userAgent)?'✅ 是':'⚠️ 否（一般瀏覽器）'));
+
     liff.init({ liffId: CONFIG.NOTES_LIFF_ID }).then(()=>{
-      if(!liff.isLoggedIn()) return;          // 一般客人沒登入，什麼都不做
+      add('LIFF 啟動：✅');
+      if(!liff.isLoggedIn()){
+        add('登入：⚠️ 尚未登入');
+        if(wantLogin()){ liff.login({ redirectUri: location.href }); }
+        return;
+      }
+      add('登入：✅');
       idToken = liff.getIDToken();
+      add('身分證(ID token)：' + (idToken ? '✅' : '❌ 沒拿到 → LIFF 的 Scope 要勾 openid'));
       liff.getProfile().then(pf=>{
+        add('你的 userId：' + pf.userId);
         if(pf.userId === CONFIG.OWNER_USERID){
+          add('老師身分：✅ 備課筆記已開啟');
           isOwner = true;
           document.getElementById('ownerNav').classList.add('show');
           if(startHash==='notes') goPage('notes');
+        }else{
+          add('老師身分：❌ 跟設定的 userId 不一樣');
         }
-      }).catch(()=>{});
-    }).catch(()=>{});
+      }).catch(e=>add('讀取個人資料：❌ ' + (e && e.message || e) + '（LIFF 的 Scope 要勾 profile）'));
+    }).catch(e=>add('LIFF 啟動：❌ ' + (e && e.message || e)));
   })();
 
   /* ===== 備課筆記 ===== */
