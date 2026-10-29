@@ -15,13 +15,19 @@
   ✏️ 于蜜老師，這裡是「設定區」
   ================================================
   LINE_ID：你的 LINE 官方帳號 ID（@ 開頭那串）
-  把 '@請填入官方帳號ID' 換掉，記得保留前後的單引號
+  NOTES_LIFF_ID：新建的「沐蜜備課」LIFF ID
+  NOTES_URL：備課筆記 Apps Script 部署後的網址（/exec 結尾）
+  把引號裡的中文換掉，記得保留前後的單引號
 -->
 <script>
   const CONFIG = {
-    LINE_ID: '@請填入官方帳號ID'
+    LINE_ID: '@請填入官方帳號ID',
+    NOTES_LIFF_ID: '請填入LIFF ID',
+    NOTES_URL: '請填入Apps Script網址',
+    OWNER_USERID: 'U15ea8c354e3e8e685104fa8b4bf5ad6e'
   };
 </script>
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
 <style>
   :root{
@@ -145,6 +151,39 @@
   .sign{text-align:center;color:var(--muted);font-size:11px;letter-spacing:.34em;margin-top:36px}
   .sign span{display:block;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:15px;letter-spacing:.2em;color:var(--brand)}
 
+  /* ===== 老師備課筆記（只有老師本人看得到） ===== */
+  .nav-i.owner{display:none;color:#7a5f2c;background:#f7f0e4}
+  .nav-i.owner.show{display:flex}
+  .cats{display:flex;gap:7px;overflow-x:auto;margin:4px -20px 16px;padding:2px 20px}
+  .cats::-webkit-scrollbar{height:0}
+  .cat{flex:none;border:1px solid var(--divider);background:var(--cream-soft);border-radius:20px;padding:6px 14px;
+    font:inherit;font-size:13px;color:var(--ink);cursor:pointer}
+  .cat.on{background:var(--brand);border-color:var(--brand);color:var(--cream-soft)}
+  .search{width:100%;font:inherit;font-size:14px;padding:12px 15px;border:1px solid var(--divider);border-radius:14px;background:#fff;color:var(--ink);margin-bottom:12px}
+  .search:focus,.ed input:focus,.ed textarea:focus,.ed select:focus{outline:none;border-color:var(--brand)}
+  .note-card{background:#fff;border:1px solid var(--divider);border-radius:16px;padding:14px 16px;margin-bottom:10px;cursor:pointer}
+  .note-card:active{background:var(--brand-soft)}
+  .note-card .nt{font-size:15px;font-weight:700;line-height:1.5}
+  .note-card .nb{font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.65;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .note-card .nm2{display:flex;gap:8px;align-items:center;margin-top:8px;font-size:11.5px;color:var(--grey)}
+  .note-card .tagc{background:var(--brand-soft);color:var(--brand-deep);border-radius:5px;padding:1px 8px;font-weight:600}
+  .empty{text-align:center;color:var(--muted);font-size:13.5px;padding:34px 10px;line-height:1.9}
+  .add-fab{margin-bottom:16px}
+  .ed-mask{position:fixed;inset:0;z-index:80;background:rgba(74,64,56,.45);display:none;align-items:flex-end;justify-content:center}
+  .ed-mask.open{display:flex}
+  .ed{background:var(--cream-soft);width:100%;max-width:520px;max-height:92vh;border-radius:22px 22px 0 0;
+    padding:20px 18px calc(18px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:10px}
+  .ed-top{display:flex;align-items:center;justify-content:space-between}
+  .ed-top b{font-size:16px;letter-spacing:.08em}
+  .ed input,.ed select,.ed textarea{width:100%;font:inherit;font-size:14.5px;padding:12px 14px;border:1px solid var(--divider);border-radius:12px;background:#fff;color:var(--ink)}
+  .ed textarea{flex:1;min-height:42vh;resize:none;line-height:1.8}
+  .ed-row{display:flex;gap:10px}
+  .ed-row .cta{padding:13px}
+  .del{flex:0 0 auto!important;width:auto!important;padding:13px 18px!important;color:#b06a4a!important;border-color:#e3c3b5!important}
+  .msg{text-align:center;font-size:13px;min-height:18px;color:var(--brand-deep)}
+  .msg.err{color:#b06a4a}
+
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -168,6 +207,7 @@
   <button class="nav-i" data-p="pro"><span class="n">03</span>美容做臉創業課程</button>
   <button class="nav-i" data-p="faq"><span class="n">04</span>常見問題</button>
   <button class="nav-i" data-p="contact"><span class="n">05</span>LINE 諮詢</button>
+  <button class="nav-i owner" id="ownerNav" data-p="notes"><span class="n">✦</span>📒 備課筆記（僅老師）</button>
   <div class="dr-line"><button class="cta fill" onclick="openLine('你好，我想了解沐蜜的美容做臉課程 🙋‍♀️')">LINE 免費諮詢</button></div>
 </nav>
 
@@ -342,7 +382,33 @@
     <div class="sign"><span>Moome 沐蜜美學秘境</span>By 于蜜老師</div>
   </section>
 
+  <!-- 06 備課筆記（只有老師本人看得到，內容存在 Google 試算表） -->
+  <section class="page" id="notes">
+    <div class="eb">Teacher Only</div>
+    <h2>📒 備課筆記</h2>
+    <div class="line"></div>
+    <button class="cta fill add-fab" onclick="openEditor()">＋ 新增筆記</button>
+    <input class="search" id="noteSearch" placeholder="搜尋標題或內容…" oninput="renderNotes()">
+    <div class="cats" id="noteCats"></div>
+    <div id="noteList"><div class="empty">讀取中…</div></div>
+  </section>
+
 </main>
+
+<!-- 筆記編輯視窗 -->
+<div class="ed-mask" id="edMask">
+  <div class="ed">
+    <div class="ed-top"><b id="edTitle">新增筆記</b><button class="dr-close" onclick="closeEditor()" aria-label="關閉">✕</button></div>
+    <select id="edCat"></select>
+    <input id="edName" placeholder="標題（例如：第一天・皮膚構造重點）">
+    <textarea id="edBody" placeholder="把想法、教材、上課流程都寫在這裡…"></textarea>
+    <div class="msg" id="edMsg"></div>
+    <div class="ed-row">
+      <button class="cta del" id="edDel" onclick="delNote()">刪除</button>
+      <button class="cta fill" id="edSave" onclick="saveNote()">儲存</button>
+    </div>
+  </div>
+</div>
 
 <script>
   const PAGES = ['home','basic','pro','faq','contact'];
@@ -352,9 +418,14 @@
     document.getElementById('mask').classList.toggle('open', open);
   }
 
+  let isOwner = false;   // 是不是老師本人（從 LINE 身分判斷）
+  let idToken = null;    // LINE 給的身分證，後端會再驗證一次
+
   function goPage(id){
-    if(PAGES.indexOf(id) < 0) id = 'home';
-    PAGES.forEach(p=>document.getElementById(p).classList.toggle('on', p===id));
+    if(id==='notes' && !isOwner) id = 'home';
+    if(PAGES.indexOf(id) < 0 && id!=='notes') id = 'home';
+    PAGES.concat(['notes']).forEach(p=>document.getElementById(p).classList.toggle('on', p===id));
+    if(id==='notes') loadNotes();
     document.querySelectorAll('.nav-i').forEach(b=>b.classList.toggle('on', b.dataset.p===id));
     toggleMenu(false);
     try{ history.replaceState(null,'','#'+id); }catch(e){}
@@ -371,7 +442,121 @@
     window.location.href = 'https://line.me/R/oaMessage/' + encodeURIComponent(id) + '/?' + encodeURIComponent(msg);
   }
 
-  goPage((location.hash||'').replace('#','') || 'home');
+  const startHash = (location.hash||'').replace('#','');
+  goPage(startHash || 'home');
+
+  /* ===== LINE 身分：只有老師本人會出現「備課筆記」 ===== */
+  (function(){
+    if(typeof liff==='undefined' || CONFIG.NOTES_LIFF_ID.indexOf('請填入')>-1) return;
+    liff.init({ liffId: CONFIG.NOTES_LIFF_ID }).then(()=>{
+      if(!liff.isLoggedIn()) return;          // 一般客人沒登入，什麼都不做
+      idToken = liff.getIDToken();
+      liff.getProfile().then(pf=>{
+        if(pf.userId === CONFIG.OWNER_USERID){
+          isOwner = true;
+          document.getElementById('ownerNav').classList.add('show');
+          if(startHash==='notes') goPage('notes');
+        }
+      }).catch(()=>{});
+    }).catch(()=>{});
+  })();
+
+  /* ===== 備課筆記 ===== */
+  const NOTE_CATS = ['新手課程','創業課程','教材草稿','我的想法','其他'];
+  let notes = [], noteCat = '全部', editing = null, notesLoaded = false;
+
+  function api(body){
+    return fetch(CONFIG.NOTES_URL, {
+      method:'POST',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify(Object.assign({ idToken }, body))
+    }).then(r=>r.json());
+  }
+  function errText(e){
+    if(e==='login') return '登入已過期，請關掉頁面，從 LINE 重新打開';
+    if(e==='forbidden') return '沒有權限';
+    return '連線失敗，請稍後再試';
+  }
+  function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+  function loadNotes(force){
+    if(notesLoaded && !force){ renderNotes(); return; }
+    document.getElementById('noteList').innerHTML = '<div class="empty">讀取中…</div>';
+    api({action:'list'}).then(res=>{
+      if(!res.ok){ document.getElementById('noteList').innerHTML = '<div class="empty">'+errText(res.error)+'</div>'; return; }
+      notes = res.notes || []; notesLoaded = true; renderNotes();
+    }).catch(()=>{ document.getElementById('noteList').innerHTML = '<div class="empty">連線失敗，請稍後再試</div>'; });
+  }
+
+  function renderNotes(){
+    const catsBox = document.getElementById('noteCats');
+    catsBox.innerHTML = '';
+    ['全部'].concat(NOTE_CATS).forEach(c=>{
+      const n = c==='全部' ? notes.length : notes.filter(x=>x.cat===c).length;
+      const b = document.createElement('button');
+      b.className = 'cat' + (c===noteCat?' on':'');
+      b.textContent = c + ' ' + n;
+      b.onclick = ()=>{ noteCat = c; renderNotes(); };
+      catsBox.appendChild(b);
+    });
+    const q = (document.getElementById('noteSearch').value||'').trim();
+    const list = notes.filter(x=>(noteCat==='全部'||x.cat===noteCat) && (!q || x.title.indexOf(q)>-1 || x.body.indexOf(q)>-1));
+    const box = document.getElementById('noteList');
+    if(!list.length){ box.innerHTML = '<div class="empty">'+(notes.length?'找不到符合的筆記':'還沒有筆記<br>按上方「＋ 新增筆記」開始寫吧 ♡')+'</div>'; return; }
+    box.innerHTML = '';
+    list.forEach(n=>{
+      const d = document.createElement('div');
+      d.className = 'note-card';
+      d.innerHTML = '<div class="nt">'+esc(n.title)+'</div>'
+        + (n.body?'<div class="nb">'+esc(n.body)+'</div>':'')
+        + '<div class="nm2"><span class="tagc">'+esc(n.cat)+'</span><span>更新 '+esc(n.updated)+'</span></div>';
+      d.onclick = ()=>openEditor(n);
+      box.appendChild(d);
+    });
+  }
+
+  function openEditor(n){
+    editing = n || null;
+    const sel = document.getElementById('edCat');
+    sel.innerHTML = NOTE_CATS.map(c=>'<option>'+c+'</option>').join('');
+    sel.value = n ? n.cat : (noteCat!=='全部' ? noteCat : NOTE_CATS[0]);
+    document.getElementById('edName').value = n ? n.title : '';
+    document.getElementById('edBody').value = n ? n.body : '';
+    document.getElementById('edTitle').textContent = n ? '編輯筆記' : '新增筆記';
+    document.getElementById('edDel').style.display = n ? '' : 'none';
+    document.getElementById('edMsg').textContent = '';
+    document.getElementById('edMask').classList.add('open');
+  }
+  function closeEditor(){ document.getElementById('edMask').classList.remove('open'); }
+
+  function saveNote(){
+    const btn = document.getElementById('edSave'), msg = document.getElementById('edMsg');
+    const note = {
+      id: editing ? editing.id : '',
+      cat: document.getElementById('edCat').value,
+      title: document.getElementById('edName').value.trim() || '未命名筆記',
+      body: document.getElementById('edBody').value
+    };
+    btn.disabled = true; btn.textContent = '儲存中…'; msg.className='msg'; msg.textContent='';
+    api({action:'save', note}).then(res=>{
+      btn.disabled = false; btn.textContent = '儲存';
+      if(!res.ok){ msg.className='msg err'; msg.textContent = errText(res.error); return; }
+      const i = notes.findIndex(x=>x.id===res.note.id);
+      if(i>=0) notes.splice(i,1);
+      notes.unshift(res.note);
+      closeEditor(); renderNotes();
+    }).catch(()=>{ btn.disabled=false; btn.textContent='儲存'; msg.className='msg err'; msg.textContent='連線失敗，內容還在，請再按一次儲存'; });
+  }
+
+  function delNote(){
+    if(!editing || !confirm('確定要刪除「'+editing.title+'」嗎？刪除後無法復原。')) return;
+    const id = editing.id;
+    api({action:'delete', id}).then(res=>{
+      if(!res.ok){ document.getElementById('edMsg').className='msg err'; document.getElementById('edMsg').textContent=errText(res.error); return; }
+      notes = notes.filter(x=>x.id!==id);
+      closeEditor(); renderNotes();
+    }).catch(()=>{ document.getElementById('edMsg').className='msg err'; document.getElementById('edMsg').textContent='連線失敗，請再試一次'; });
+  }
 </script>
 </body>
 </html>
