@@ -154,6 +154,8 @@
   /* ===== 老師備課筆記（只有老師本人看得到） ===== */
   .nav-i.owner{display:none;color:#7a5f2c;background:#f7f0e4}
   .nav-i.owner.show{display:flex}
+  .owner-btn{display:none;background:#f7f0e4;border-color:#c9a961;color:#7a5f2c}
+  .owner-btn.show{display:flex}
   .cats{display:flex;gap:7px;overflow-x:auto;margin:4px -20px 16px;padding:2px 20px}
   .cats::-webkit-scrollbar{height:0}
   .cat{flex:none;border:1px solid var(--divider);background:var(--cream-soft);border-radius:20px;padding:6px 14px;
@@ -195,7 +197,10 @@
     <img class="tb-logo" src="logo.jpg" alt="" onerror="this.style.display='none'">
     <span class="tb-title">沐蜜美學</span>
   </div>
-  <button class="menu-btn" onclick="toggleMenu(true)"><i><b></b><b></b><b></b></i>目錄</button>
+  <div style="display:flex;gap:8px">
+    <button class="menu-btn owner-btn" id="ownerTop" onclick="goPage('notes')">📒 筆記</button>
+    <button class="menu-btn" onclick="toggleMenu(true)"><i><b></b><b></b><b></b></i>目錄</button>
+  </div>
 </header>
 
 <!-- 右側目錄（點「目錄」才出現） -->
@@ -464,7 +469,7 @@
     }
     function add(s){ log.push(s); report(); }
 
-    add('網頁版本：notes-v2');
+    add('網頁版本：notes-v3');
     if(typeof liff==='undefined'){ add('❌ LINE 工具沒載入（網路問題）'); return; }
     if(CONFIG.NOTES_LIFF_ID.indexOf('請填入')>-1){ add('❌ LIFF ID 沒填'); return; }
     add('在 LINE 裡開啟：' + (/Line\//i.test(navigator.userAgent)?'✅ 是':'⚠️ 否（一般瀏覽器）'));
@@ -485,6 +490,7 @@
           add('老師身分：✅ 備課筆記已開啟');
           isOwner = true;
           document.getElementById('ownerNav').classList.add('show');
+          document.getElementById('ownerTop').classList.add('show');
           if(startHash==='notes') goPage('notes');
         }else{
           add('老師身分：❌ 跟設定的 userId 不一樣');
