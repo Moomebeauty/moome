@@ -219,6 +219,24 @@
   .promise span{font-size:12px;font-weight:400;color:var(--brand)}
   .feat .fn{min-width:24px;text-align:center}
 
+  /* 課程重點卡 */
+  .hook{font-size:19px;line-height:1.6;letter-spacing:.06em;margin:0 2px 16px}
+  .hook b{color:var(--brand-deep)}
+  .hl{background:#fff;border:1px solid var(--divider);border-radius:18px;padding:16px;margin-bottom:12px}
+  .hl.star{border:2px solid #c9a961;background:linear-gradient(180deg,#fff,#faf3e6)}
+  .hl-top{display:flex;gap:12px;align-items:center}
+  .hl-ic{font-size:28px;line-height:1;width:44px;height:44px;border-radius:14px;background:var(--brand-soft);display:flex;align-items:center;justify-content:center;flex:none}
+  .hl-k{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.2em}
+  .hl-t{font-size:16px;font-weight:700;line-height:1.45}
+  .hl-tags{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0}
+  .hl-tags span{font-size:12.5px;background:var(--cream-soft);border:1px solid var(--divider);color:var(--brand-deep);border-radius:20px;padding:3px 11px}
+  .hl-gain{margin-top:12px;font-size:14px;font-weight:600;color:var(--brand-deep)}
+  .hl-gain.big{font-size:15px;color:#7a5f2c;background:#f7f0e4;border-radius:12px;padding:10px 12px}
+  .sys{display:flex;flex-direction:column;padding:10px 0;border-bottom:1px dashed var(--sand)}
+  .sys:first-of-type{margin-top:6px}
+  .sys b{font-size:14.5px}
+  .sys span{font-size:12.5px;color:var(--muted)}
+
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -293,9 +311,15 @@
     <div class="chips-row"><span class="chip">📅 3 天</span><span class="chip">⏰ 共 18 小時</span><span class="chip">👩 含真人模特兒考核</span></div>
 
     <div class="block">
-      <div class="bt">📅 3 天課程重點</div>
-      <div class="daytabs"><button class="on" data-d="1">Day 1</button><button class="" data-d="2">Day 2</button><button class="" data-d="3">Day 3</button></div>
-      <div class="days"><div class="day on" data-d="1"><div class="dt">🧴 美容師的底氣</div><div class="ds">膚況精準判讀 ＋ 沙龍級潔膚</div><div class="half">☀️ 上午</div><ul class="dl"><li>🔍 5 大膚質精準判讀</li><li>🧪 去品牌化成分搭配（玻尿酸、神經醯胺、水楊酸、積雪草…）</li><li>⚠️ 護膚禁忌與安全規範，辨識不能施作的狀況</li></ul><div class="half">🌙 下午</div><ul class="dl"><li>💬 顧問式迎賓諮詢</li><li>🤲 沙龍級無感卸妝洗臉手法</li><li>♨️ 毛巾溫熱敷與包頭技巧</li><li>✨ 依膚質去角質、深層軟化</li></ul></div><div class="day" data-d="2"><div class="dt">💆 核心變現技術</div><div class="ds">無痛清粉刺 ＋ 沉浸式按摩</div><div class="half">☀️ 上午</div><ul class="dl"><li>🔬 認識黑頭、白頭、丘疹、膿皰</li><li>✋ 粉刺夾靈魂握法，手不抖</li><li>🌸 無痛、不留疤的閉鎖性粉刺清理</li><li>🧊 清完快速退紅、泛紅脫屑急救</li></ul><div class="half">🌙 下午</div><ul class="dl"><li>📍 面部 12 個黃金穴位減壓</li><li>🌊 歐式排毒引流拉提按摩</li><li>👀 3C 眼周舒緩手法</li></ul></div><div class="day" data-d="3"><div class="dt">🏅 儀器運用 ＋ 成果驗收</div><div class="ds">軟膜鎖水封管 ＋ 真人考核</div><div class="half">☀️ 上午</div><ul class="dl"><li>⚡ 超音波導入儀、冰導儀操作</li><li>🎭 泥膜、凍膜、軟膜調配與鎖水封管</li><li>🔁 課後衛教，引導客人預約下一次</li></ul><div class="half">🌙 下午</div><ul class="dl"><li>👩 120 分鐘真人模特兒全流程考核</li><li>📝 講師現場講評、修正手勢</li><li>🎓 頒發沐蜜結業證書</li></ul></div></div>
+      <div class="hook">3 天，從「完全不會」<br>到「<b>可以開始收錢</b>」✨</div>
+      <div class="hl"><div class="hl-top"><span class="hl-ic">📖</span><div><div class="hl-k">學科</div><div class="hl-t">看一眼，就懂客人的皮膚</div></div></div>
+        <div class="hl-tags"><span>皮膚學</span><span>膚況判讀</span><span>成分調配邏輯</span><span>客製化搭配</span></div>
+        <div class="hl-gain">👉 不靠牌子，看臉就知道該用什麼</div></div>
+      <div class="hl"><div class="hl-top"><span class="hl-ic">🤲</span><div><div class="hl-k">術科</div><div class="hl-t">讓客人做一次就愛上你</div></div></div>
+        <div class="hl-tags"><span>一試成主顧諮詢術</span><span>神級洗臉＋按摩手技</span><span>無痛不留疤清粉刺</span></div>
+        <div class="hl-gain">👉 客人做完，主動問你下次什麼時候</div></div>
+      <div class="hl star"><div class="hl-top"><span class="hl-ic">🏅</span><div><div class="hl-k">實戰考核</div><div class="hl-t">120 分鐘真人全流程考核</div></div></div>
+        <div class="hl-gain big">💰 畢業即具備時薪 $1,500+ 的接客能力</div></div>
       <button class="promise" onclick="goPage('belief')">🤝 不推銷・80% 實操・課後指導・不綁約<span>看四大承諾 ›</span></button>
     </div>
 
@@ -338,14 +362,20 @@
     </div>
 
     <div class="block">
-      <div class="bt">📅 5 天課程重點</div>
-      <div class="daytabs"><button class="on" data-d="1">Day 1–2</button><button class="" data-d="3">Day 3</button><button class="" data-d="4">Day 4</button><button class="" data-d="5">Day 5 👑</button></div>
-      <div class="days"><div class="day on" data-d="1"><div class="dt">🌿 核心技術紮根</div><div class="ds">Day 1～2・同新手班手技精華</div><ul class="dl"><li>🔍 膚況判讀 ＋ 成分自由搭配</li><li>💬 顧問式諮詢、無感卸洗、溫熱敷</li><li>🌸 無痛不留疤清粉刺</li><li>🌊 歐式穴位引流拉提按摩</li></ul></div><div class="day" data-d="3"><div class="dt">⚡ 儀器導入 ＋ 真人考核</div><div class="ds">Day 3</div><ul class="dl"><li>⚡ 儀器操作與安瓶精華搭配</li><li>🎭 全臉調膜、完美鎖水封管</li><li>🧊 退紅、泛紅、乾燥脫屑急救處理</li><li>👩 120 分鐘真人模特兒考核</li></ul></div><div class="day" data-d="4"><div class="dt">🧭 創業定位 ＋ 視覺製圖</div><div class="ds">Day 4・讓你會做，也會賣</div><ul class="dl"><li>🧭 個人顧問諮詢：兼職試水溫，還是全職衝刺？</li><li>🏠 依預算評估：個人工作室、店面、美容分租</li><li>🎨 用手機做出質感 IG / FB 宣傳圖與限動</li><li>📸 Before / After 對比照高質感排版</li></ul></div><div class="day gold" data-d="5"><div class="dt">👑 老闆商業閉環</div><div class="ds">Day 5・開店需要的底氣，一次架好</div><ul class="dl"><li>🔮 帶平面圖來，老師診斷財位與聚客佈局</li><li>📱 LINE 官方帳號預約系統串接，自動提醒客人</li><li>📊 美業財務損益系統：客單價、材料、房租水電一目了然，抓出漏財點</li></ul></div></div>
+      <div class="hook">不只學會做臉，<br>直接把一間<b>會賺錢的工作室</b>帶回家 🏠</div>
+      <div class="hl"><div class="hl-top"><span class="hl-ic">🌱</span><div><div class="hl-k">技術</div><div class="hl-t">新手技術班的全部內容</div></div></div>
+        <div class="hl-tags"><span>學科</span><span>術科</span><span>120 分鐘實戰考核</span></div>
+        <div class="hl-gain">👉 先讓你有一雙會賺錢的手</div></div>
+      <div class="hl star"><div class="hl-top"><span class="hl-ic">🤖</span><div><div class="hl-k">加碼</div><div class="hl-t">整套「自動化賺錢系統」</div></div></div>
+        <div class="sys"><b>💼 商業經營</b><span>開店怎麼走，老師陪你規劃，不再亂摸索</span></div>
+        <div class="sys"><b>📱 預約系統</b><span>客人自己約時間，你專心做臉就好</span></div>
+        <div class="sys"><b>📊 財務損益系統</b><span>每一單賺多少，打開就一清二楚</span></div>
+        <div class="hl-gain big">✨ 你負責做臉，系統幫你顧店</div></div>
       <button class="promise" onclick="goPage('belief')">🤝 不推銷・80% 實操・課後指導・不綁約<span>看四大承諾 ›</span></button>
     </div>
 
     <div class="block">
-      <div class="gain">💡 創業沒有你想的那麼簡單，但這次，<b>你不需要獨自摸索</b>。<br>從起步分析、工作室風水、預約與財務系統，到網路製圖課，開店需要的底氣，5 天全部幫你架設完畢！</div>
+      <div class="gain">💡 創業沒有你想的那麼簡單，但這次，<b>你不需要獨自摸索</b>。<br>開店需要的底氣，5 天陪你一次備齊 💪</div>
     </div>
 
     <div class="block">
@@ -519,7 +549,7 @@
     }
     function add(s){ log.push(s); report(); }
 
-    add('網頁版本：notes-v5');
+    add('網頁版本：notes-v6');
     if(typeof liff==='undefined'){ add('❌ LINE 工具沒載入（網路問題）'); return; }
     if(CONFIG.NOTES_LIFF_ID.indexOf('請填入')>-1){ add('❌ LIFF ID 沒填'); return; }
     add('在 LINE 裡開啟：' + (/Line\//i.test(navigator.userAgent)?'✅ 是':'⚠️ 否（一般瀏覽器）'));
