@@ -186,6 +186,20 @@
   .msg{text-align:center;font-size:13px;min-height:18px;color:var(--brand-deep)}
   .msg.err{color:#b06a4a}
 
+  /* 課程特色條列 */
+  .chips-row{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{font-size:12px;color:var(--brand-deep);background:var(--cream-soft);border:1px solid var(--divider);border-radius:20px;padding:3px 12px;letter-spacing:.04em;white-space:nowrap}
+  .chip.hot{background:#f7f0e4;border-color:#e3cfa6;color:#7a5f2c;font-weight:600}
+  .feat{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--divider);border-radius:16px;padding:14px 16px;margin-bottom:10px}
+  .feat .fn{font-family:"Noto Serif TC",serif;font-size:20px;font-weight:700;color:var(--gold2);line-height:1.3;flex:none}
+  .feat b{display:block;font-size:15px;line-height:1.5}
+  .feat p{font-size:12.5px;color:var(--muted);line-height:1.75;margin-top:3px}
+  .feat.gold{border-color:#e3cfa6;background:linear-gradient(180deg,#fff,var(--cream-soft))}
+  .feat.gold b{color:#7a5f2c}
+  .tags{display:flex;gap:6px;flex-wrap:wrap}
+  .tags span{font-size:12.5px;color:var(--brand-deep);background:var(--brand-soft);border-radius:6px;padding:3px 10px;font-weight:600}
+  .switch + .switch{margin-top:0}
+
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -208,12 +222,13 @@
 <nav class="drawer" id="drawer">
   <div class="dr-head"><span class="en">Menu</span><button class="dr-close" onclick="toggleMenu(false)" aria-label="關閉">✕</button></div>
   <button class="nav-i" data-p="home"><span class="n">01</span>沐蜜美學</button>
-  <button class="nav-i" data-p="basic"><span class="n">02</span>美容做臉新手課程</button>
-  <button class="nav-i" data-p="pro"><span class="n">03</span>美容做臉創業課程</button>
-  <button class="nav-i" data-p="faq"><span class="n">04</span>常見問題</button>
-  <button class="nav-i" data-p="contact"><span class="n">05</span>LINE 諮詢</button>
+  <button class="nav-i" data-p="basic"><span class="n">02</span>技術新手課程</button>
+  <button class="nav-i" data-p="pro"><span class="n">03</span>創業全科課程</button>
+  <button class="nav-i" data-p="belief"><span class="n">04</span>教學理念</button>
+  <button class="nav-i" data-p="faq"><span class="n">05</span>常見問題</button>
+  <button class="nav-i" data-p="contact"><span class="n">06</span>LINE 諮詢</button>
   <button class="nav-i owner" id="ownerNav" data-p="notes"><span class="n">✦</span>📒 備課筆記（僅老師）</button>
-  <div class="dr-line"><button class="cta fill" onclick="openLine('你好，我想了解沐蜜的美容做臉課程 🙋‍♀️')">LINE 免費諮詢</button></div>
+  <div class="dr-line"><button class="cta fill" onclick="openLine('你好，我想了解沐蜜的美容做臉課程 🙋‍♀️')">私訊沐蜜官方 LINE</button></div>
 </nav>
 
 <main class="wrap">
@@ -221,9 +236,11 @@
   <!-- 01 首頁 -->
   <section class="page" id="home">
     <div class="eb">Moome Academy</div>
-    <h1>學會一技之長<br>擁有<b>屬於自己的事業</b></h1>
+    <h1>學完就能立即接客<br>靠<b>自己雙手</b>賺錢</h1>
     <div class="line"></div>
-    <p class="lead">零基礎也能學會。學完就能自己獨立服務客人，有方向、有步驟，不再害怕。</p>
+    <p class="lead">不是品牌代理，而是真實有效、陪你落地的美容做臉創業班。</p>
+
+    <div class="tags" style="margin-top:14px"><span>✕ 拒絕直銷綁架</span><span>✕ 拒絕強制推銷</span></div>
 
     <div class="benefits">
       <div class="bf"><div class="ic">01</div><b>學得會</b><span>保姆級<br>從零教起</span></div>
@@ -234,47 +251,41 @@
     <div class="q-title">你現在是哪一種？</div>
     <button class="pick" onclick="goPage('basic')">
       <div>
-        <div class="who">完全沒經驗・想學一技之長</div>
-        <div class="nm">美容做臉新手課程</div>
-        <div class="pr">NT$ 26,000 起</div>
+        <div class="who">零基礎・想學一技之長</div>
+        <div class="nm">技術新手課程</div>
+        <div class="pr">3 天・NT$ 26,000 起</div>
       </div><span class="go">›</span>
     </button>
     <button class="pick adv" onclick="goPage('pro')">
       <div>
-        <div class="who">想開店・想創業</div>
-        <div class="nm">美容做臉創業課程<span class="badge">進階</span></div>
-        <div class="pr">NT$ 52,000 起</div>
+        <div class="who">想開工作室・自己接客</div>
+        <div class="nm">創業全科課程<span class="badge">熱門首選</span></div>
+        <div class="pr">5 天・NT$ 52,000 起</div>
       </div><span class="go">›</span>
     </button>
+    <button class="switch" onclick="goPage('belief')">為什麼我們不賣產品？看沐蜜的教學理念 ›</button>
   </section>
 
-  <!-- 02 新手課程 -->
+  <!-- 02 技術新手課程 -->
   <section class="page" id="basic">
-    <div class="eb">Beginner</div>
-    <h2>美容做臉新手課程</h2>
+    <div class="eb">Technique</div>
+    <h2>美容做臉・技術新手課程</h2>
     <div class="line"></div>
-    <p class="lead">給無經驗、零基礎小白的保姆級課程。</p>
+    <div class="chips-row"><span class="chip">3 天</span><span class="chip">共 18 小時</span><span class="chip">含真人模特兒實操考核</span></div>
 
     <div class="block">
       <div class="bt">你會學到</div>
-      <ul class="list">
-        <li>在沒有老師在旁邊的情況下，有方向、有步驟地完成顧客服務</li>
-        <li>建立美容做臉的基礎邏輯與觀念</li>
-        <li>看懂肌膚問題，知道該怎麼解決</li>
-      </ul>
-    </div>
-
-    <div class="block">
-      <div class="bt">課程提供</div>
-      <!-- ✏️ 老師之後要填課程內容：把下面這一整行 <div class="slot">…</div> 換成文字即可 -->
-      <div class="slot">課程內容整理中，歡迎 LINE 詢問 ♡</div>
+      <div class="feat"><div class="fn">01</div><div><b>專業服務流程設計</b><p>從進門諮詢、膚況判讀到送客，設計讓顧客上癮、持續回購的療程體驗。</p></div></div>
+      <div class="feat"><div class="fn">02</div><div><b>細膩精緻手技教學</b><p>手把手修正力道與角度，讓客人做完臉真正看見改變。</p></div></div>
+      <div class="feat"><div class="fn">03</div><div><b>常見棘手問題處理</b><p>閉鎖性粉刺、做完泛紅、乾燥脫屑，面對任何膚況都老神在在。</p></div></div>
+      <div class="feat"><div class="fn">04</div><div><b>成分認識與搭配邏輯</b><p>看懂保養品成分，依膚況自由搭配，省下昂貴的材料溢價。</p></div></div>
     </div>
 
     <div class="block">
       <div class="bt">課後保障</div>
-      <!-- ✏️ 複訓細節之後可加在「一年免費複訓」下面 -->
+      <!-- ✏️ 複訓細節之後可加在這裡 -->
       <div class="gain"><b>一年複訓</b>：學完還可以回來，更深入地學習。</div>
-      <div class="perk">♡ 後續若沐蜜有再開任何課程，享學員專屬優惠價。</div>
+      <div class="perk">♡ 後續沐蜜再開任何課程，享學員專屬優惠價。</div>
     </div>
 
     <div class="block">
@@ -283,21 +294,21 @@
         <div class="price"><div class="k">一對二</div><div class="v"><small>NT$</small>26,000</div><div class="u">每人</div></div>
         <div class="price"><div class="k">一對一</div><div class="v"><small>NT$</small>36,000</div><div class="u">專屬教學</div></div>
       </div>
-      <p class="note">※ 費用不含工具，報名前會清楚說明</p>
+      <p class="note">※ 費用不含工具，材料工具清單公開透明</p>
     </div>
 
     <div class="block">
-      <button class="cta fill" onclick="openLine('你好，我想詢問【美容做臉新手課程】🙋‍♀️')">LINE 詢問新手課程</button>
-      <button class="switch" onclick="goPage('pro')">想開店創業？看創業課程 ›</button>
+      <button class="cta fill" onclick="openLine('你好，我想詢問【美容做臉・技術新手課程】🙋‍♀️')">LINE 詢問技術新手課程</button>
+      <button class="switch" onclick="goPage('pro')">想開工作室？看創業全科課程 ›</button>
     </div>
   </section>
 
-  <!-- 03 創業課程 -->
+  <!-- 03 創業全科課程 -->
   <section class="page" id="pro">
     <div class="eb">Business</div>
-    <h2>美容做臉創業課程</h2>
+    <h2>美容做臉・創業全科課程</h2>
     <div class="line"></div>
-    <p class="lead">技術更深入，再幫你把整個事業系統化建好。</p>
+    <div class="chips-row"><span class="chip hot">🏆 熱門首選</span><span class="chip">5 天</span><span class="chip">共 30 小時</span><span class="chip">技術深造＋商業落地</span></div>
 
     <div class="block">
       <div class="bt">適合你，如果…</div>
@@ -309,31 +320,16 @@
     </div>
 
     <div class="block">
-      <div class="bt">你會得到</div>
-      <ul class="list">
-        <li>技術更深入的探討</li>
-        <li>依照你的狀況，規劃與調整事業計畫</li>
-      </ul>
-      <div style="height:10px"></div>
-      <ul class="list plus">
-        <li>LINE 線上預約系統完整建置</li>
-        <li>財務系統完整建置</li>
-      </ul>
-    </div>
-
-    <div class="block">
-      <div class="gain">不用再擔心創業到底有沒有賺錢。<br><b>所有數據一目了然</b>，清楚知道該怎麼調整方向、做出決策。</div>
-    </div>
-
-    <div class="block">
-      <div class="bt">課程提供</div>
-      <!-- ✏️ 老師之後要填課程內容：把下面這一整行 <div class="slot">…</div> 換成文字即可 -->
-      <div class="slot">課程內容整理中，歡迎 LINE 詢問 ♡</div>
+      <div class="bt">三大創業陪跑優勢</div>
+      <div class="feat gold"><div class="fn">01</div><div><b>工作室催財聚客風水佈局</b><p>診斷工作室財位與聚客動線，避開漏財位置，讓客人一進門就感覺舒適安心。</p></div></div>
+      <div class="feat gold"><div class="fn">02</div><div><b>LINE 預約接單自動化系統</b><p>幫你建好做臉預約系統，自動提醒客人，不用再整天忙著回訊息對時間。</p></div></div>
+      <div class="feat gold"><div class="fn">03</div><div><b>美業專用財務記帳與損益系統</b><p>精準算出每一單的客單價、材料成本與淨利，所有數據一目了然。</p></div></div>
+      <div class="perk">🎁 隨課附贈：美容視覺製圖課，用手機做出質感 IG / FB 宣傳圖。</div>
     </div>
 
     <div class="block">
       <div class="bt">課後保障</div>
-      <div class="gain"><b>一年複訓</b>：同新手課程規範。</div>
+      <div class="gain"><b>一年複訓</b>：同技術新手課程規範。</div>
     </div>
 
     <div class="block">
@@ -342,25 +338,46 @@
         <div class="price"><div class="k">一對二</div><div class="v"><small>NT$</small>52,000</div><div class="u">每人</div></div>
         <div class="price"><div class="k">一對一</div><div class="v"><small>NT$</small>68,000</div><div class="u">專屬教學</div></div>
       </div>
-      <p class="note">※ 費用不含工具，報名前會清楚說明</p>
+      <p class="note">※ 費用不含工具，材料工具清單公開透明</p>
     </div>
 
     <div class="block">
-      <button class="cta fill" onclick="openLine('你好，我想詢問【美容做臉創業課程】🙋‍♀️')">LINE 詢問創業課程</button>
-      <button class="switch" onclick="goPage('basic')">‹ 先從新手課程開始</button>
+      <button class="cta fill" onclick="openLine('你好，我想詢問【美容做臉・創業全科課程】🙋‍♀️')">LINE 詢問創業全科課程</button>
+      <button class="switch" onclick="goPage('basic')">‹ 先從技術新手課程開始</button>
     </div>
   </section>
 
-  <!-- 04 常見問題 -->
+  <!-- 04 教學理念 -->
+  <section class="page" id="belief">
+    <div class="eb">Our Belief</div>
+    <h2>我們不賣產品<br>只賣讓你獨立賺錢的真本事</h2>
+    <div class="line"></div>
+    <div class="tags"><span>#沒有品牌迷思</span><span>#沒有推銷</span><span>#沒有簽約</span><span>#不是直銷微商</span></div>
+    <p class="lead" style="margin-top:18px">我們不受限於任何一個牌子，因為顧客的肌膚狀況，才是最該被重視的出發點。每一款要用在顧客臉上的保養品，都是講師親身實測、看見效果後才敢教。</p>
+
+    <div class="block">
+      <div class="bt">蜜的教學堅持</div>
+      <div class="feat"><div class="fn">01</div><div><b>不紙上談兵</b><p>理論學科＋術科實操，老師全程在旁，隨時修正你的手勢。</p></div></div>
+      <div class="feat"><div class="fn">02</div><div><b>不綁架產品</b><p>公開美容材料工具清單，教你懂成分、會搭配，絕不強迫推銷、無隱形二次消費。</p></div></div>
+    </div>
+
+    <div class="block">
+      <button class="cta fill" onclick="goPage('contact')">聊聊我的想法 ›</button>
+    </div>
+  </section>
+
+  <!-- 05 常見問題 -->
   <section class="page" id="faq">
     <div class="eb">Q &amp; A</div>
     <h2>常見問題</h2>
     <div class="line"></div>
     <div style="border-top:1px solid var(--divider)">
       <details><summary><span>完全零基礎，學得會嗎？</span></summary>
-        <p>可以。新手課程就是為零基礎設計的，一對一、一對二小班，老師會看著你做、當場調整。</p></details>
+        <p>可以。技術新手課程就是為零基礎設計的，一對一、一對二小班，老師全程在旁、當場修正。</p></details>
       <details><summary><span>兩門課要怎麼選？</span></summary>
-        <p>想先學好技術 → 新手課程。想直接開店、需要預約和財務系統 → 創業課程。不確定就加 LINE 問老師。</p></details>
+        <p>想先把技術學好 → 技術新手課程。想直接開工作室，需要風水、預約和財務系統 → 創業全科課程。不確定就加 LINE 問老師。</p></details>
+      <details><summary><span>會要我買產品或簽約嗎？</span></summary>
+        <p>不會。我們不賣產品、不簽約、不是直銷，材料工具清單公開，你可以自己選購。</p></details>
       <details><summary><span>男生可以學嗎？</span></summary>
         <p>當然可以！</p></details>
       <details><summary><span>學費有包含工具嗎？</span></summary>
@@ -370,19 +387,19 @@
     </div>
   </section>
 
-  <!-- 05 LINE 諮詢 -->
+  <!-- 06 LINE 諮詢 -->
   <section class="page" id="contact">
     <div class="eb">Contact</div>
-    <h2>從一則 LINE 開始</h2>
+    <h2>用雙手，撐起<br>你對自由生活的渴望</h2>
     <div class="line"></div>
-    <p class="lead" style="margin-bottom:22px">不確定適不適合？先聊聊，沒有任何壓力。</p>
-    <div class="s4"><span class="sn">1</span>點下方按鈕，加入 LINE</div>
-    <div class="s4"><span class="sn">2</span>說說你目前的狀況</div>
-    <div class="s4"><span class="sn">3</span>老師幫你推薦適合的課程</div>
+    <p class="lead" style="margin-bottom:22px">這不是只在教室裡的理論課，而是一場帶你在美業站穩腳步的創業特訓。名額有限，一律採預約制，確保教學品質。</p>
+    <div class="s4"><span class="sn">1</span>點下方按鈕，私訊沐蜜官方 LINE</div>
+    <div class="s4"><span class="sn">2</span>聊聊你的想法與現況</div>
+    <div class="s4"><span class="sn">3</span>幫你規劃最適合的起步路線 🌿</div>
     <div style="height:18px"></div>
-    <button class="cta fill" onclick="openLine('你好，我想了解沐蜜的美容做臉課程 🙋‍♀️')">
+    <button class="cta fill" onclick="openLine('你好，我想聊聊沐蜜的美容做臉課程，想請老師幫我規劃起步路線 🌿')">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.4 22 12.8 22 11c0-4.4-4.5-8-10-8Z"/></svg>
-      加入 LINE・免費諮詢
+      私訊沐蜜官方 LINE
     </button>
     <div class="sign"><span>Moome 沐蜜美學秘境</span>By 于蜜老師</div>
   </section>
@@ -416,7 +433,7 @@
 </div>
 
 <script>
-  const PAGES = ['home','basic','pro','faq','contact'];
+  const PAGES = ['home','basic','pro','belief','faq','contact'];
 
   function toggleMenu(open){
     document.getElementById('drawer').classList.toggle('open', open);
@@ -469,7 +486,7 @@
     }
     function add(s){ log.push(s); report(); }
 
-    add('網頁版本：notes-v3');
+    add('網頁版本：notes-v4');
     if(typeof liff==='undefined'){ add('❌ LINE 工具沒載入（網路問題）'); return; }
     if(CONFIG.NOTES_LIFF_ID.indexOf('請填入')>-1){ add('❌ LIFF ID 沒填'); return; }
     add('在 LINE 裡開啟：' + (/Line\//i.test(navigator.userAgent)?'✅ 是':'⚠️ 否（一般瀏覽器）'));
