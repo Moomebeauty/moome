@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>沐蜜 Moome · 美容做臉創業課程</title>
+<meta name="description" content="沐蜜 Moome 美容護膚做臉創業課程｜台南｜從零基礎到獨立開業，技術＋商業雙軌教學。">
+<meta property="og:title" content="沐蜜 Moome · 美容做臉創業課程">
+<meta property="og:description" content="從零基礎到獨立開業，打造你的小顏美肌工作室。台南小班制・真人實操・創業陪跑。">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+
+<!--
+  ================================================
+  ✏️ 于蜜老師，這裡是「設定區」，只需要改這裡就好
+  ================================================
+  LINE_ID：你的 LINE 官方帳號 ID（Moome 沐蜜美學秘境）
+    → 到 LINE Official Account Manager 首頁，
+      帳號名稱下面那串「@」開頭的英數字就是，例如 @123abcde
+    → 把下面 '@請填入官方帳號ID' 換掉，記得保留前後的單引號
+-->
+<script>
+  const CONFIG = {
+    LINE_ID: '@請填入官方帳號ID'
+  };
+</script>
+
+<style>
+  /* 與「沐蜜線上預約系統」同一套配色 */
+  :root{
+    --brand:#8c7c6a; --brand-deep:#6f6151; --brand-soft:#f3ece2;
+    --ink:#4a4038; --grey:#b3a596; --divider:#ece4d9; --ivory:#fdfaf6;
+    --cream-soft:#faf5ec; --sand:#e6dccb; --gold:#b99a63; --gold2:#c9a961; --muted:#b3a596;
+    --rail:64px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:var(--ivory);color:var(--ink);line-height:1.8;letter-spacing:.02em;-webkit-font-smoothing:antialiased}
+
+  /* ===== 左側導覽列 ===== */
+  .rail{position:fixed;top:0;bottom:0;left:0;width:var(--rail);z-index:50;
+    background:var(--cream-soft);border-right:1px solid var(--divider);
+    display:flex;flex-direction:column;padding:14px 0 calc(14px + env(safe-area-inset-bottom));overflow-y:auto}
+  .rail::-webkit-scrollbar{width:0}
+  .rail-logo{width:40px;height:40px;border-radius:50%;object-fit:cover;margin:0 auto 12px;display:block}
+  .rail-brand{display:none}
+  .nav-i{position:relative;background:none;border:none;font:inherit;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;gap:1px;padding:11px 2px;
+    color:var(--grey);font-size:12px;letter-spacing:.1em;transition:.2s}
+  .nav-i .n{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:13px;letter-spacing:.06em;color:var(--gold);opacity:.6}
+  .nav-i .en{display:none}
+  .nav-i.on{color:var(--brand-deep);background:#fff;font-weight:600}
+  .nav-i.on .n{opacity:1}
+  .nav-i.on::before{content:"";position:absolute;left:0;top:20%;bottom:20%;width:2.5px;border-radius:2px;background:var(--brand)}
+  .nav-i.hot::after{content:"";position:absolute;top:9px;right:12px;width:6px;height:6px;border-radius:50%;background:var(--gold2)}
+
+  /* ===== 右側內容 ===== */
+  main{margin-left:var(--rail);min-height:100vh;padding-bottom:84px}
+  .wrap{max-width:540px;margin:0 auto;position:relative}
+  .page{display:none;padding:30px 18px 26px;animation:fade .35s ease}
+  .page.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .ptitle{position:relative;font-size:21px;font-weight:400;letter-spacing:.16em;color:var(--ink);
+    margin:0 2px 8px;padding-top:26px;line-height:1.6}
+  .ptitle::before{content:attr(data-eb);position:absolute;top:0;left:0;
+    font-family:"Cormorant Garamond",serif;font-style:italic;font-size:13px;
+    letter-spacing:.38em;color:var(--gold);text-transform:uppercase;white-space:nowrap}
+  .ptitle::after{content:"";position:absolute;left:0;bottom:-14px;width:34px;height:1.5px;
+    background:linear-gradient(to right,var(--brand),transparent)}
+  .psub{font-size:13px;color:var(--muted);margin:26px 2px 22px;letter-spacing:.04em;line-height:1.9}
+
+  .cta{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:15px;
+    border:1px solid var(--brand);border-radius:26px;background:#fff;color:var(--brand);
+    font:inherit;font-weight:600;font-size:15px;letter-spacing:.1em;cursor:pointer;text-decoration:none;
+    transition:transform .2s ease,background .2s}
+  .cta:active{transform:scale(.985);background:var(--brand-soft)}
+  .cta.fill{background:var(--brand);color:var(--cream-soft)}
+  .cta.fill:hover{background:var(--brand-deep)}
+  .cta svg{width:19px;height:19px;flex:none}
+
+  /* 上一頁／下一頁（同預約系統 navrow） */
+  .navrow{display:flex;gap:10px;margin-top:30px}
+  .navbtn2{flex:1;padding:14px 8px;border:1px solid var(--brand);border-radius:26px;background:#fff;
+    color:var(--brand);font:inherit;font-size:13.5px;letter-spacing:.06em;cursor:pointer;font-weight:600}
+  .navbtn2:active{background:var(--brand-soft)}
+  .navbtn2.next{background:var(--brand-soft)}
+  .navbtn2:disabled{visibility:hidden}
+
+  .chip{font-size:12px;color:var(--brand-deep);background:var(--cream-soft);border:1px solid var(--divider);
+    border-radius:20px;padding:3px 12px;letter-spacing:.06em;white-space:nowrap}
+
+  /* 首頁 */
+  .hero .eb{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:13px;letter-spacing:.38em;
+    color:var(--gold);text-transform:uppercase;margin:6px 2px 16px}
+  .hero .q{margin:0 2px 20px;color:var(--brand-deep);font-size:14px;line-height:2}
+  .hero .q span{display:block}
+  .hero .tag{display:inline-block;margin:0 2px 12px;font-size:12px;font-weight:600;letter-spacing:.12em;
+    color:var(--brand);background:var(--brand-soft);border-radius:5px;padding:4px 11px}
+  .hero h1{font-weight:400;font-size:25px;letter-spacing:.1em;line-height:1.65;margin:0 2px 6px}
+  .hero h1 b{font-weight:700;color:var(--brand-deep)}
+  .hero .line{width:34px;height:1.5px;background:linear-gradient(to right,var(--brand),transparent);margin:18px 2px 18px}
+  .hero p.sub{font-size:13.5px;color:var(--muted);margin:0 2px 24px;line-height:1.95}
+  .hero .ctas{display:flex;flex-direction:column;gap:12px}
+  .hero .meta{display:flex;gap:7px;flex-wrap:wrap;margin:20px 2px 0}
+
+  /* 擔心 */
+  .ncard{background:var(--cream-soft);border:1px solid var(--divider);border-radius:16px;padding:16px 18px;
+    margin-bottom:10px;display:flex;gap:14px;align-items:flex-start}
+  .nc-no{font-family:"Noto Serif TC",serif;font-size:24px;font-weight:700;color:var(--gold2);line-height:1.1}
+  .nc-t{font-size:15px;font-weight:700;margin-bottom:3px}
+  .nc-d{font-size:12.5px;color:var(--muted);line-height:1.75}
+  .answer{margin:18px 2px 0;font-size:15px;color:var(--brand-deep);letter-spacing:.08em}
+
+  /* 課程 */
+  .grp-title{font-family:"Noto Serif TC",serif;font-size:15px;font-weight:700;color:var(--brand-deep);
+    letter-spacing:.12em;margin:4px 2px 12px;padding-left:12px;position:relative}
+  .grp-title::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);
+    width:3px;height:15px;border-radius:2px;background:linear-gradient(180deg,var(--gold2),#a8823f)}
+  .item{border:1px solid var(--brand);border-radius:18px;padding:14px 16px;background:#fff;margin-bottom:10px}
+  .item .nm{font-size:15px;font-weight:700;line-height:1.5}
+  .item .mt{font-size:12.5px;color:var(--grey);margin-top:3px;line-height:1.65}
+  .new-badge{display:inline-block;margin-left:7px;font-size:9.5px;font-weight:700;letter-spacing:.08em;
+    color:#fff;background:linear-gradient(135deg,var(--gold2),#a8823f);padding:2px 8px;border-radius:20px;
+    vertical-align:middle;transform:translateY(-1px)}
+  .gap{height:18px}
+
+  /* 方案：上方切換三個方案，一次只看一張 */
+  .ppl-pick{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 12px}
+  .ppl{border:1.5px solid var(--divider);background:var(--cream-soft);border-radius:13px;padding:11px 4px;
+    text-align:center;cursor:pointer;font-weight:600;font-size:14px;color:var(--ink);font-family:inherit;transition:.18s}
+  .ppl.sel{background:var(--brand);border-color:var(--brand);color:var(--cream-soft)}
+  .plan-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:16px}
+  .ptab{border:1px solid var(--divider);background:#fff;border-radius:12px;padding:9px 2px;cursor:pointer;
+    font:inherit;font-size:12.5px;color:var(--grey);line-height:1.4;position:relative}
+  .ptab b{display:block;font-size:13.5px;color:var(--ink);font-weight:600}
+  .ptab.on{border-color:var(--brand);border-width:1.5px;background:var(--brand-soft)}
+  .ptab.on b{color:var(--brand-deep)}
+  .ptab .dot{position:absolute;top:-8px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:700;
+    color:#fff;background:linear-gradient(135deg,var(--gold2),#a8823f);border-radius:10px;padding:1px 7px;white-space:nowrap}
+  .plan{display:none;border:1px solid var(--brand);border-radius:18px;background:#fff;padding:20px 18px 18px;position:relative;animation:fade .3s ease}
+  .plan.on{display:block}
+  .plan.star{border-width:2px;background:linear-gradient(180deg,#fff 0%,var(--cream-soft) 100%);box-shadow:0 10px 28px rgba(140,124,106,.14)}
+  .plan .pen{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:13px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase}
+  .plan h3{font-size:19px;font-weight:700;letter-spacing:.1em;margin:2px 0 4px}
+  .plan .for{font-size:12.5px;color:var(--grey);line-height:1.7}
+  .plan .price{display:flex;align-items:baseline;gap:6px;margin:12px 0 4px;flex-wrap:wrap}
+  .plan .price .cur{font-size:13px;color:var(--brand-deep);font-weight:600}
+  .plan .price .amt{font-size:28px;font-weight:700}
+  .plan .price .per{font-size:12.5px;color:var(--muted)}
+  .plan .chips{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 12px}
+  .plan .solve{font-size:12.5px;font-weight:600;color:var(--brand-deep);background:var(--brand-soft);border-radius:10px;padding:8px 12px;margin-bottom:12px;line-height:1.6}
+  .plan ul{list-style:none;border-top:1px solid var(--divider);margin-bottom:16px}
+  .plan li{font-size:13.5px;padding:9px 2px 9px 24px;border-bottom:1px solid var(--divider);position:relative}
+  .plan li::before{content:"✓";position:absolute;left:2px;color:var(--brand);font-weight:700}
+  .plan li.plus{color:#7a5f2c;font-weight:600}
+  .plan li.plus::before{content:"＋";color:var(--gold)}
+  .note{font-size:12px;color:var(--muted);margin:12px 2px 0;line-height:1.85}
+
+  /* 老師 */
+  .mentor{display:flex;gap:14px;align-items:center;background:var(--cream-soft);border:1px solid var(--divider);border-radius:18px;padding:16px;margin-bottom:18px}
+  .avatar{width:66px;height:66px;border-radius:50%;flex:none;object-fit:cover;background:var(--brand-soft);border:1px solid var(--sand)}
+  .mentor .nm{font-family:"Noto Serif TC",serif;font-size:16px;font-weight:700}
+  .mentor .role{font-size:11.5px;color:var(--gold);letter-spacing:.1em}
+  .mentor p{font-size:12.5px;line-height:1.8;margin-top:4px}
+  .guar{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .g{background:#fff;border:1px solid var(--divider);border-radius:16px;padding:14px 13px}
+  .g .ic{font-family:"Noto Serif TC",serif;font-size:20px;font-weight:700;color:var(--gold2);line-height:1;margin-bottom:7px}
+  .g h4{font-size:14px;font-weight:700;margin-bottom:3px}
+  .g p{font-size:12px;color:var(--muted);line-height:1.7}
+
+  /* 優惠 */
+  .bi-block{background:var(--cream-soft);border:1px solid #ecdfc9;border-radius:16px;padding:16px 16px;margin-bottom:18px}
+  .bi-h{font-family:"Noto Serif TC",serif;font-size:15px;font-weight:700;color:#8a6d3f;margin-bottom:8px}
+  .bi-row{font-size:13px;line-height:1.8;padding:9px 0;border-bottom:1px dashed var(--sand)}
+  .bi-row:last-child{border-bottom:none}
+  .bi-row b{display:block;color:#a8823f}
+  .gift-free{font-size:10.5px;font-weight:700;letter-spacing:.1em;color:#fff;background:#a8823f;padding:1px 8px;border-radius:5px;margin-left:4px}
+
+  /* 問答 */
+  details{border-bottom:1px solid var(--divider)}
+  summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:15px 2px;font-size:14.5px;font-weight:600;line-height:1.6}
+  summary::-webkit-details-marker{display:none}
+  summary span{flex:1}
+  summary::after{content:"▼";font-size:10px;transition:transform .25s}
+  details[open] summary::after{transform:rotate(180deg)}
+  details p{font-size:13px;line-height:1.9;padding:0 2px 16px}
+
+  /* 諮詢 */
+  .steps4{display:flex;flex-direction:column;gap:8px;margin:0 0 24px}
+  .s4{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--divider);border-radius:14px;padding:12px 16px;font-size:14px}
+  .s4 .sn{font-family:"Noto Serif TC",serif;font-size:18px;font-weight:700;color:var(--gold2);width:18px}
+  .sign{text-align:center;color:var(--muted);font-size:11px;letter-spacing:.34em;margin-top:36px}
+  .sign span{display:block;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:15px;letter-spacing:.2em;color:var(--brand);margin-bottom:2px}
+
+  /* 底部固定諮詢列 */
+  .bar{position:fixed;left:var(--rail);right:0;bottom:0;z-index:40;background:var(--ivory);
+    border-top:1px solid var(--divider);padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+  .bar .cta{max-width:508px;margin:0 auto;padding:12px}
+  .bar.hide{display:none}
+
+  /* 電腦／平板：導覽列變寬，文字橫排 */
+  @media (min-width:768px){
+    :root{--rail:200px}
+    .rail{padding:28px 0}
+    .rail-logo{width:56px;height:56px;margin:0 auto 8px}
+    .rail-brand{display:block;text-align:center;font-family:"Cormorant Garamond",serif;font-style:italic;
+      color:var(--brand);letter-spacing:.2em;font-size:15px;margin-bottom:22px}
+    .nav-i{flex-direction:row;justify-content:flex-start;gap:12px;padding:13px 26px;font-size:14px}
+    .nav-i .en{display:inline;margin-left:auto;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:12px;letter-spacing:.1em;color:var(--muted)}
+    .page{padding:46px 30px 30px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+
+<!-- 左側導覽列 -->
+<nav class="rail" id="rail">
+  <img class="rail-logo" src="logo.jpg" alt="" onerror="this.style.display='none'">
+  <div class="rail-brand">Moome</div>
+  <button class="nav-i" data-p="home"><span class="n">01</span>首頁<span class="en">Home</span></button>
+  <button class="nav-i" data-p="worry"><span class="n">02</span>擔心<span class="en">Worries</span></button>
+  <button class="nav-i" data-p="course"><span class="n">03</span>課程<span class="en">Course</span></button>
+  <button class="nav-i hot" data-p="plans"><span class="n">04</span>方案<span class="en">Programs</span></button>
+  <button class="nav-i" data-p="teacher"><span class="n">05</span>老師<span class="en">Mentor</span></button>
+  <button class="nav-i" data-p="offer"><span class="n">06</span>優惠<span class="en">Offer</span></button>
+  <button class="nav-i" data-p="faq"><span class="n">07</span>問答<span class="en">Q&amp;A</span></button>
+  <button class="nav-i" data-p="contact"><span class="n">08</span>諮詢<span class="en">Contact</span></button>
+</nav>
+
+<main>
+<div class="wrap">
+
+  <!-- 01 首頁 -->
+  <section class="page hero" id="home">
+    <div class="eb">Moome Academy</div>
+    <div class="q">
+      <span>— 想轉行，卻沒有一技之長？</span>
+      <span>— 想開工作室，卻不知道從哪開始？</span>
+    </div>
+    <span class="tag">美容護膚做臉創業全能班</span>
+    <h1>從零基礎到獨立開業<br>打造你的<b>高回訪</b><br><b>小顏美肌工作室</b></h1>
+    <div class="line"></div>
+    <p class="sub">不只教你做臉，更教你怎麼把技術變成收入。技術 ＋ 商業雙軌陪跑，讓你學完就能接客。</p>
+    <div class="ctas">
+      <button class="cta fill" onclick="goPage('plans')">看三種課程方案</button>
+      <button class="cta" onclick="goPage('worry')">先了解課程 ›</button>
+    </div>
+    <div class="meta"><span class="chip">台南</span><span class="chip">小班制</span><span class="chip">一對一 / 一對二</span><span class="chip">真人實操</span></div>
+  </section>
+
+  <!-- 02 擔心 -->
+  <section class="page" id="worry">
+    <div class="ptitle" data-eb="Is this you">你是不是也有這些擔心</div>
+    <div class="psub">想學美容、想創業的人，最常卡住的是這四件事。</div>
+    <div class="ncard"><div class="nc-no">01</div><div><div class="nc-t">技術焦慮</div><div class="nc-d">我是完全零基礎的素人，真的學得會嗎？</div></div></div>
+    <div class="ncard"><div class="nc-no">02</div><div><div class="nc-t">創業迷茫</div><div class="nc-d">學完要去哪裡找客人？價格該怎麼定？</div></div></div>
+    <div class="ncard"><div class="nc-no">03</div><div><div class="nc-t">資金壓力</div><div class="nc-d">裝潢和儀器是不是要花幾十萬？我負擔得起嗎？</div></div></div>
+    <div class="ncard"><div class="nc-no">04</div><div><div class="nc-t">現狀不滿</div><div class="nc-d">厭倦朝九晚五、領死薪水，想掌握自己的時間。</div></div></div>
+    <p class="answer">這些，沐蜜都陪你一步一步解決 ♡</p>
+  </section>
+
+  <!-- 03 課程 -->
+  <section class="page" id="course">
+    <div class="ptitle" data-eb="Curriculum">技術＋商業雙軌課程</div>
+    <div class="psub">教的不只是手法，還有讓工作室賺錢的方法。</div>
+    <div class="grp-title">專業美容技術篇</div>
+    <div class="item"><div class="nm">皮膚構造學與膚況精準判讀</div><div class="mt">看懂客人的皮膚，不只照本宣科</div></div>
+    <div class="item"><div class="nm">獨家手法：深層清粉刺不留疤</div><div class="mt">乾淨、舒服、不留痕跡</div></div>
+    <div class="item"><div class="nm">科技美容儀器操作與安全規範</div><div class="mt">會用、用對、用得安全</div></div>
+    <div class="gap"></div>
+    <div class="grp-title">高效創業商戰篇<span class="new-badge">重點</span></div>
+    <div class="item"><div class="nm">低成本工作室籌備術</div><div class="mt">選址、輕裝潢到必備器具清單</div></div>
+    <div class="item"><div class="nm">高轉化定價與療程設計</div><div class="mt">讓客人體驗後直接買單的高客單組合</div></div>
+    <div class="item"><div class="nm">零客源引流實戰</div><div class="mt">IG / LINE 官方帳號經營，開幕就有預約</div></div>
+  </section>
+
+  <!-- 04 方案 -->
+  <section class="page" id="plans">
+    <div class="ptitle" data-eb="Programs">選擇適合你的方案</div>
+    <div class="psub">點上方切換方案，再選上課人數。</div>
+
+    <div class="plan-tabs">
+      <button class="ptab on" data-plan="p3"><span class="dot">推薦</span><b>全能創業</b>5 天</button>
+      <button class="ptab" data-plan="p2"><b>複合技術</b>2 天</button>
+      <button class="ptab" data-plan="p1"><b>純技術</b>3 天</button>
+    </div>
+    <div class="ppl-pick">
+      <button class="ppl sel" data-mode="duo">一對二（每人）</button>
+      <button class="ppl" data-mode="solo">一對一</button>
+    </div>
+
+    <div class="plan star on" id="p3">
+      <div class="pen">All-in-One</div>
+      <h3>全能創業班</h3>
+      <div class="for">想直接開個人工作室、自己接客人的創業家</div>
+      <div class="price"><span class="cur">NT$</span><span class="amt" data-duo="52,000" data-solo="68,000">52,000</span><span class="per" data-per>／每人</span></div>
+      <div class="chips"><span class="chip">5 天</span><span class="chip">技術＋系統＋風水</span></div>
+      <div class="solve">解決：想開店，卻不知道怎麼開始、不懂行銷與財務</div>
+      <ul>
+        <li>基礎到進階的完整手法技術</li>
+        <li>工作室籌備：選址、輕裝潢、器具清單</li>
+        <li>定價策略與高客單療程設計</li>
+        <li>IG / LINE 零客源引流實戰</li>
+        <li class="plus">聚客風水佈局</li>
+        <li class="plus">LINE 線上預約系統完整建置</li>
+        <li class="plus">財務系統完整建置</li>
+      </ul>
+      <button class="cta fill" onclick="askPlan('全能創業班')">詢問全能創業班</button>
+    </div>
+
+    <div class="plan" id="p2">
+      <div class="pen">Upgrade</div>
+      <h3>複合技術班</h3>
+      <div class="for">已有工作室與客源，想加做臉項目轉型的老闆</div>
+      <div class="price"><span class="cur">NT$</span><span class="amt" data-duo="36,000" data-solo="46,000">36,000</span><span class="per" data-per>／每人</span></div>
+      <div class="chips"><span class="chip">2 天</span><span class="chip">同行加項・二次變現</span></div>
+      <div class="solve">解決：業績卡關，想提高營業額與客單價</div>
+      <ul>
+        <li>做臉核心技術濃縮教學</li>
+        <li>結合既有服務，設計加購與套組</li>
+        <li>整體經營規劃與調整建議</li>
+        <li class="plus">既有空間的風水財位調整規劃</li>
+        <li class="plus">LINE 預約系統＋財務系統導入協助</li>
+      </ul>
+      <button class="cta fill" onclick="askPlan('複合技術班')">詢問複合技術班</button>
+    </div>
+
+    <div class="plan" id="p1">
+      <div class="pen">Technique</div>
+      <h3>純技術班</h3>
+      <div class="for">零基礎素人・想兼職斜槓・想學一技之長</div>
+      <div class="price"><span class="cur">NT$</span><span class="amt" data-duo="26,000" data-solo="36,000">26,000</span><span class="per" data-per>／每人</span></div>
+      <div class="chips"><span class="chip">3 天</span><span class="chip">共 18 小時</span></div>
+      <div class="solve">解決：我怕學不會</div>
+      <ul>
+        <li>皮膚構造與膚況判讀</li>
+        <li>從基礎到完整的做臉手法流程</li>
+        <li>深層清粉刺不留疤技巧</li>
+        <li>美容儀器操作與安全規範</li>
+        <li>小班手把手、真人實操練習</li>
+      </ul>
+      <button class="cta fill" onclick="askPlan('純技術班')">詢問純技術班</button>
+    </div>
+    <p class="note">※ 學費皆不含工具，工具清單與費用報名前清楚說明，無隱形消費。</p>
+  </section>
+
+  <!-- 05 老師 -->
+  <section class="page" id="teacher">
+    <div class="ptitle" data-eb="Why Moome">為什麼選擇沐蜜</div>
+    <div class="psub">學的是一套已經在台南實際運作的工作室模式。</div>
+    <div class="mentor">
+      <img class="avatar" src="logo.jpg" alt="" onerror="this.style.visibility='hidden'">
+      <div>
+        <div class="role">FOUNDER · 創辦人</div>
+        <div class="nm">于蜜老師</div>
+        <p>在台南經營私宅美學工作室多年，從做臉、霧眉到自己架設預約與財務系統，教的都是每天在用、真的有效的方法。</p>
+      </div>
+    </div>
+    <div class="guar">
+      <div class="g"><div class="ic">01</div><h4>小班制教學</h4><p>一對一、一對二，手把手確保手法精準。</p></div>
+      <div class="g"><div class="ic">02</div><h4>真人實操</h4><p>不只練假人頭，課程包含真人實作。</p></div>
+      <div class="g"><div class="ic">03</div><h4>技術複訓</h4><p>學員社群與複訓機制，隨時回來練。</p></div>
+      <div class="g"><div class="ic">04</div><h4>創業輔導</h4><p>結業證書＋一手渠道，不被高價剝削。</p></div>
+    </div>
+  </section>
+
+  <!-- 06 優惠 -->
+  <section class="page" id="offer">
+    <div class="ptitle" data-eb="Limited Offer">本月報名加碼</div>
+    <div class="psub">小班排課，每月名額有限，先諮詢先安排。</div>
+    <div class="bi-block">
+      <div class="bi-h">✦ 報名專屬好禮</div>
+      <div class="bi-row"><b>限時報名禮<span class="gift-free">加贈</span></b>本月報名加碼贈送創業好禮，內容請私訊 LINE 了解</div>
+      <div class="bi-row"><b>可無卡分期</b>不用一次付清，用做臉的收入慢慢回本</div>
+      <div class="bi-row"><b>名額有限</b>一對一、一對二排課，額滿即開下一期</div>
+    </div>
+    <button class="cta fill" onclick="openLine('你好，我想了解這個月的報名優惠與可上課日期 🎁')">LINE 詢問本月優惠</button>
+  </section>
+
+  <!-- 07 問答 -->
+  <section class="page" id="faq">
+    <div class="ptitle" data-eb="Q &amp; A">常見問題</div>
+    <div class="psub">點問題即可展開答案。</div>
+    <div style="border-top:1px solid var(--divider)">
+      <details><summary><span>完全零基礎，真的學得會嗎？</span></summary>
+        <p>可以的。小班一對一、一對二，從皮膚構造講起，每個手法都看你實際操作、當場調整，直到做得穩為止。</p></details>
+      <details><summary><span>男生也可以學嗎？</span></summary>
+        <p>當然可以！美容做臉看的是手法與專業，也很受男性客人信任。</p></details>
+      <details><summary><span>沒有證照，可以幫客人做臉嗎？</span></summary>
+        <p>一般臉部清潔、保養護膚屬於美容服務，不是醫療行為；但雷射、針劑等醫療項目不能做。課程會分享工作室營運的基本規範，也會帶你規劃考照方向。實際規定以主管機關最新公告為準。</p></details>
+      <details><summary><span>需要自己帶模特兒嗎？</span></summary>
+        <p>可以自備，也可以私訊 LINE 討論安排方式，我們會依你的上課日期一起規劃。</p></details>
+      <details><summary><span>學費包含工具嗎？</span></summary>
+        <p>學費不含工具。報名前會提供完整工具清單與費用，可自行準備或透過我們的一手渠道購買。</p></details>
+      <details><summary><span>畢業後還可以問老師嗎？</span></summary>
+        <p>可以！學員可以在社群提問，也有複訓機制，開店路上卡關隨時回來找我們。</p></details>
+      <details><summary><span>不知道選哪個方案？</span></summary>
+        <p>直接加 LINE 告訴我們你的狀況，老師會幫你判斷最適合的方案，不會硬推。</p></details>
+    </div>
+  </section>
+
+  <!-- 08 諮詢 -->
+  <section class="page" id="contact">
+    <div class="ptitle" data-eb="Begin with Moome">從一則 LINE 開始</div>
+    <div class="psub">不確定適不適合？先聊聊，沒有任何壓力。</div>
+    <div class="steps4">
+      <div class="s4"><span class="sn">1</span>點下方按鈕，加入 LINE</div>
+      <div class="s4"><span class="sn">2</span>說說你目前的狀況</div>
+      <div class="s4"><span class="sn">3</span>老師幫你配適合的方案</div>
+      <div class="s4"><span class="sn">4</span>安排上課日期</div>
+    </div>
+    <button class="cta fill" onclick="openLine('你好，我想了解沐蜜的美容做臉課程，想請老師幫我推薦適合的方案 🙋‍♀️')">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.4 22 12.8 22 11c0-4.4-4.5-8-10-8Z"/></svg>
+      加入 LINE・免費課程諮詢
+    </button>
+    <div class="sign"><span>Moome 沐蜜美學秘境</span>By 于蜜老師</div>
+  </section>
+
+  <!-- 每頁底部：上一頁／下一頁 -->
+  <div style="padding:0 18px">
+    <div class="navrow">
+      <button class="navbtn2" id="prevBtn">‹ 上一頁</button>
+      <button class="navbtn2 next" id="nextBtn">下一頁 ›</button>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<!-- 底部固定 LINE 諮詢 -->
+<div class="bar" id="bar">
+  <button class="cta fill" onclick="openLine('你好，我想了解沐蜜的美容做臉課程 🙋‍♀️')">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-6C21.3 14.4 22 12.8 22 11c0-4.4-4.5-8-10-8Z"/></svg>
+    LINE 免費諮詢
+  </button>
+</div>
+
+<script>
+  const PAGES = ['home','worry','course','plans','teacher','offer','faq','contact'];
+  const NAMES = {home:'首頁',worry:'擔心',course:'課程',plans:'方案',teacher:'老師',offer:'優惠',faq:'問答',contact:'諮詢'};
+  let cur = 'home';
+  let mode = 'duo';     // duo＝一對二、solo＝一對一
+  let curPlan = '全能創業班';
+
+  // 切換頁面：一次只顯示一頁
+  function goPage(id){
+    if(PAGES.indexOf(id) < 0) id = 'home';
+    cur = id;
+    PAGES.forEach(p=>document.getElementById(p).classList.toggle('on', p===id));
+    document.querySelectorAll('.nav-i').forEach(b=>b.classList.toggle('on', b.dataset.p===id));
+    const i = PAGES.indexOf(id);
+    const prev = document.getElementById('prevBtn'), next = document.getElementById('nextBtn');
+    prev.disabled = (i===0);
+    next.disabled = (i===PAGES.length-1);
+    if(i>0) prev.textContent = '‹ ' + NAMES[PAGES[i-1]];
+    if(i<PAGES.length-1) next.textContent = NAMES[PAGES[i+1]] + ' ›';
+    document.getElementById('bar').classList.toggle('hide', id==='contact');
+    try{ history.replaceState(null,'','#'+id); }catch(e){}
+    window.scrollTo({top:0});
+  }
+  document.querySelectorAll('.nav-i').forEach(b=>b.onclick=()=>goPage(b.dataset.p));
+  document.getElementById('prevBtn').onclick=()=>goPage(PAGES[PAGES.indexOf(cur)-1]);
+  document.getElementById('nextBtn').onclick=()=>goPage(PAGES[PAGES.indexOf(cur)+1]);
+
+  // 方案切換：一次只看一個方案
+  const PLAN_NAME = {p3:'全能創業班', p2:'複合技術班', p1:'純技術班'};
+  document.querySelectorAll('.ptab').forEach(t=>t.onclick=()=>{
+    document.querySelectorAll('.ptab').forEach(x=>x.classList.toggle('on', x===t));
+    document.querySelectorAll('.plan').forEach(p=>p.classList.toggle('on', p.id===t.dataset.plan));
+    curPlan = PLAN_NAME[t.dataset.plan];
+  });
+
+  // 人數切換
+  document.querySelectorAll('.ppl').forEach(b=>b.onclick=()=>{
+    mode = b.dataset.mode;
+    document.querySelectorAll('.ppl').forEach(x=>x.classList.toggle('sel', x===b));
+    document.querySelectorAll('.amt').forEach(el=>{ el.textContent = el.dataset[mode]; });
+    document.querySelectorAll('[data-per]').forEach(el=>{ el.textContent = mode==='duo' ? '／每人' : '／一對一'; });
+  });
+
+  // 打開 LINE 官方帳號，並自動帶入一段訊息
+  function openLine(msg){
+    const id = (CONFIG.LINE_ID || '').trim();
+    if(!id || id.indexOf('請填入') > -1){
+      alert('（老師請注意）還沒設定 LINE 官方帳號 ID，請到 index.html 最上面的設定區填入。');
+      return;
+    }
+    window.location.href = 'https://line.me/R/oaMessage/' + encodeURIComponent(id) + '/?' + encodeURIComponent(msg);
+  }
+  function askPlan(name){
+    const who = mode==='duo' ? '一對二' : '一對一';
+    openLine('你好，我想詢問【' + name + '・' + who + '】的課程內容與上課日期 🙋‍♀️');
+  }
+
+  // 開啟時：網址有 #plans 這類就直接跳到那一頁
+  goPage((location.hash||'').replace('#','') || 'home');
+</script>
+</body>
+</html>
