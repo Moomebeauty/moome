@@ -237,6 +237,18 @@
   .sys b{font-size:14.5px}
   .sys span{font-size:12.5px;color:var(--muted)}
 
+  /* 隨課附贈 */
+  .gift{background:#fff;border:1px solid var(--divider);border-radius:18px;padding:14px 14px 12px;margin-bottom:10px}
+  .gift.gold{border:2px solid #c9a961;background:linear-gradient(180deg,#fff,#faf3e6)}
+  .gift-h{font-size:14.5px;font-weight:700;color:var(--brand-deep);margin-bottom:10px}
+  .gift.gold .gift-h{color:#7a5f2c;margin-bottom:0}
+  .kit{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .kit-i{display:flex;align-items:center;gap:8px;background:var(--cream-soft);border:1px solid var(--divider);border-radius:12px;padding:10px 12px;font-size:13.5px;font-weight:600}
+  .kit-i span{font-size:20px;line-height:1}
+  .kit-note{margin-top:10px;font-size:12.5px;color:var(--brand-deep);line-height:1.85;background:var(--brand-soft);border-radius:12px;padding:10px 12px}
+  .kit-note.out{margin-top:0}
+  .gift .sys:last-child{border-bottom:none;padding-bottom:2px}
+
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -324,6 +336,20 @@
     </div>
 
     <div class="block">
+      <div class="bt">🎁 隨課附贈</div>
+      <div class="gift">
+        <div class="gift-h">🧰 美容工具組・帶回家直接開工</div>
+        <div class="kit">
+          <div class="kit-i"><span>✂️</span>粉刺夾</div>
+          <div class="kit-i"><span>🥣</span>美容缽 ×2</div>
+          <div class="kit-i"><span>🖌️</span>美容刷</div>
+          <div class="kit-i"><span>🧻</span>美容紙巾 1 盒</div>
+        </div>
+        <div class="kit-note">🧴 保養品不附贈，畢業後用你自己喜歡的品牌就好。<br>💡 上課練習用的產品，老師全部幫你準備好，不用另外買！</div>
+      </div>
+    </div>
+
+    <div class="block">
       <div class="bt">🛡️ 課後保障</div>
       <!-- ✏️ 複訓細節之後可加在這裡 -->
       <div class="gain">🔁 <b>一年複訓</b>：學完還可以回來，更深入地學習。<br>📲 <b>課後持續指導</b>：遇到特殊膚況，拍影片傳給老師，在線幫你看。</div>
@@ -336,7 +362,7 @@
         <div class="price"><div class="k">👭 一對二</div><div class="v"><small>NT$</small>26,000</div><div class="u">每人</div></div>
         <div class="price"><div class="k">👤 一對一</div><div class="v"><small>NT$</small>36,000</div><div class="u">專屬教學</div></div>
       </div>
-      <p class="note">※ 費用不含工具，材料批發清單公開透明</p>
+      <p class="note">※ 學費已含美容工具組，保養品依個人喜好自備</p>
     </div>
 
     <div class="block">
@@ -350,7 +376,7 @@
     <div class="eb">Business</div>
     <h2>👑 美容做臉・創業全科課程</h2>
     <div class="line"></div>
-    <div class="chips-row"><span class="chip hot">🏆 熱門首選</span><span class="chip">📅 5 天</span><span class="chip">⏰ 共 30 小時</span><span class="chip">💼 技術＋商業落地</span></div>
+    <div class="chips-row"><span class="chip hot">🏆 熱門首選</span><span class="chip">📅 5 天</span><span class="chip">⏰ 共 30 小時</span></div>
 
     <div class="block">
       <div class="bt">🎯 適合你，如果…</div>
@@ -368,14 +394,33 @@
         <div class="hl-gain">👉 先讓你有一雙會賺錢的手</div></div>
       <div class="hl star"><div class="hl-top"><span class="hl-ic">🤖</span><div><div class="hl-k">加碼</div><div class="hl-t">整套「自動化賺錢系統」</div></div></div>
         <div class="sys"><b>💼 商業經營</b><span>開店怎麼走，老師陪你規劃，不再亂摸索</span></div>
-        <div class="sys"><b>📱 預約系統</b><span>客人自己約時間，你專心做臉就好</span></div>
-        <div class="sys"><b>📊 財務損益系統</b><span>每一單賺多少，打開就一清二楚</span></div>
+        <div class="sys"><b>📱 預約系統</b><span>專屬客製化，客人自己約時間，你專心做臉就好</span></div>
+        <div class="sys"><b>📊 財務損益系統</b><span>專屬客製化，每一單賺多少，打開就一清二楚</span></div>
         <div class="hl-gain big">✨ 你負責做臉，系統幫你顧店</div></div>
       <button class="promise" onclick="goPage('belief')">🤝 不推銷・80% 實操・課後指導・不綁約<span>看四大承諾 ›</span></button>
     </div>
 
     <div class="block">
       <div class="gain">💡 創業沒有你想的那麼簡單，但這次，<b>你不需要獨自摸索</b>。<br>開店需要的底氣，5 天陪你一次備齊 💪</div>
+    </div>
+
+    <div class="block">
+      <div class="bt">🎁 隨課附贈</div>
+      <div class="gift">
+        <div class="gift-h">🧰 美容工具組・帶回家直接開工</div>
+        <div class="kit">
+          <div class="kit-i"><span>✂️</span>粉刺夾</div>
+          <div class="kit-i"><span>🥣</span>美容缽 ×2</div>
+          <div class="kit-i"><span>🖌️</span>美容刷</div>
+          <div class="kit-i"><span>🧻</span>美容紙巾 1 盒</div>
+        </div>
+      </div>
+      <div class="gift gold">
+        <div class="gift-h">👑 創業班獨享・老師幫你客製化建置</div>
+        <div class="sys"><b>📱 專屬預約系統</b><span>依你想要的樣子量身打造，客人自己約時間</span></div>
+        <div class="sys"><b>📊 專屬財務損益系統</b><span>依你的店客製化，每一單賺多少一目了然</span></div>
+      </div>
+      <div class="kit-note out">🧴 保養品不附贈，畢業後用你自己喜歡的品牌就好。<br>💡 上課練習用的產品，老師全部幫你準備好，不用另外買！</div>
     </div>
 
     <div class="block">
@@ -389,7 +434,7 @@
         <div class="price"><div class="k">👭 一對二</div><div class="v"><small>NT$</small>52,000</div><div class="u">每人</div></div>
         <div class="price"><div class="k">👤 一對一</div><div class="v"><small>NT$</small>68,000</div><div class="u">專屬教學</div></div>
       </div>
-      <p class="note">※ 費用不含工具，材料批發清單公開透明</p>
+      <p class="note">※ 學費已含美容工具組，保養品依個人喜好自備</p>
     </div>
 
     <div class="block">
@@ -432,11 +477,11 @@
       <details><summary><span>需要自己帶模特兒嗎？</span></summary>
         <p>第三天的 120 分鐘真人考核，需要自備一名模特兒，朋友、家人都可以。</p></details>
       <details><summary><span>會要我買產品或簽約嗎？</span></summary>
-        <p>不會。我們不賣產品、不簽約、不是直銷，材料工具清單公開，你可以自己選購。</p></details>
+        <p>不會。我們不賣產品、不簽約、不是直銷，保養品用你自己喜歡的品牌就好。</p></details>
       <details><summary><span>男生可以學嗎？</span></summary>
         <p>當然可以！</p></details>
       <details><summary><span>學費有包含工具嗎？</span></summary>
-        <p>不含工具，報名前會給你完整清單與費用說明。</p></details>
+        <p>有！兩門課都附美容工具組：粉刺夾、美容缽 ×2、美容刷、美容紙巾 1 盒。保養品不附贈，你可以用自己喜歡的品牌；上課練習用的產品，老師全部準備好。創業課程另外附贈專屬客製化的預約系統與財務損益系統。</p></details>
       <details><summary><span>學完忘記怎麼辦？</span></summary>
         <p>兩門課都有一年複訓，可以回來再練、再學更深入的內容。</p></details>
     </div>
@@ -549,7 +594,7 @@
     }
     function add(s){ log.push(s); report(); }
 
-    add('網頁版本：notes-v6');
+    add('網頁版本：notes-v7');
     if(typeof liff==='undefined'){ add('❌ LINE 工具沒載入（網路問題）'); return; }
     if(CONFIG.NOTES_LIFF_ID.indexOf('請填入')>-1){ add('❌ LIFF ID 沒填'); return; }
     add('在 LINE 裡開啟：' + (/Line\//i.test(navigator.userAgent)?'✅ 是':'⚠️ 否（一般瀏覽器）'));
